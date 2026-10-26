@@ -30,11 +30,27 @@ yarn-error.*
 .DS_Store
 *.pem
 
-# local env files
-.env*.local
-
 # typescript
 *.tsbuildinfo
+
+# local environment variables
+.env
+.env.*
+!.env.example
+
+# AI agent instructions and configuration
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+copilot-instructions.md
+*.agent.md
+*.prompt.md
+*.instructions.md
+.claude/
+.cursor/rules/
+.github/agents/
+.github/instructions/
+.github/prompts/
 
 example
 
