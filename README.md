@@ -4,7 +4,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
 ## Preview
 
-![App preview](./assets/images/preview.jpg)
+<img src="./assets/images/preview.jpg" alt="App preview" width="320">
 
 ## Get started
 
