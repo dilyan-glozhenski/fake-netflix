@@ -5,7 +5,7 @@ import {
   Text,
   type PressableProps,
 } from 'react-native';
-import { theme } from '../theme';
+import { theme } from '../../theme';
 
 type ButtonSize = 'small' | 'medium' | 'large';
 

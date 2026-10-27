@@ -1,17 +1,23 @@
 import http from "../../../shared/api/http";
-import { MovieCategory } from "../../../shared/constants/categories";
 import { Movie } from "../types";
 
 
 export const getAllMovies = async (): Promise<Movie[]> => {
     // there is no endpoint to get all movies, so we will return a list of random movies for demonstration purposes
-    const KEYWORDS = ["man", "love", "dark", "space", "world", "time", "dead", "star", "night", "city", "lord", "ring", "war", "life", "dream", "blood", "fire", "water", "earth", "winds"];
+    const keywords = ["man", "love", "dark", "space", "world", "time", "dead", "star", "night", "city", "lord", "ring", "war", "life", "dream", "blood", "fire", "water", "earth", "winds"];
     const movies: Movie[] = [];
-    const randomKeyword = KEYWORDS[Math.floor(Math.random() * KEYWORDS.length)];
+
+    for (let index = keywords.length - 1; index > 0; index--) {
+        const randomIndex = Math.floor(Math.random() * (index + 1));
+        [keywords[index], keywords[randomIndex]] = [keywords[randomIndex], keywords[index]];
+    }
+    
+    const randomKeywords = keywords.slice(0, 5);
 
     try {
-        const requests = Array.from({ length: 5 }, (_, i) => http.get(process.env.EXPO_PUBLIC_MOVIES_BASE_URL || '',
-            { s: randomKeyword, page: (i + 1).toString() }));
+        const requests = randomKeywords.map((keyword) =>
+            http.get(process.env.EXPO_PUBLIC_MOVIES_BASE_URL || '', { s: keyword, page: '1' }),
+        );
         const responses = await Promise.all(requests);
         responses.forEach((response: any) => {
             if (response.Search) {
@@ -53,4 +59,3 @@ export const getMovieById = async (id: string): Promise<Movie> => {
         throw error;
     }
 }
-

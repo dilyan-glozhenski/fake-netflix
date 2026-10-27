@@ -1,5 +1,5 @@
 import { Text } from 'react-native';
-import { theme } from '../theme';
+import { theme } from '../../theme';
 
 type TypographySize = keyof typeof theme.fontSize;
 type TypographyWeight = keyof typeof theme.fontWeight;
