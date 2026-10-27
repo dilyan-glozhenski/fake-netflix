@@ -3,7 +3,6 @@ import { useRouter } from 'expo-router';
 import { Movie } from '../types';
 import { theme } from '../../../shared/theme';
 import { Button, Typography } from '@/shared/components';
-import { useMemo } from 'react';
 
 export default function SpotlightMovie({ title, poster, imdbID }: Movie) {
     const router = useRouter();
@@ -19,18 +18,6 @@ export default function SpotlightMovie({ title, poster, imdbID }: Movie) {
     const onAddToFavoritesPressedHandler = () => {
         // add to favorites functionality
     };
-
-    const addToFavIcon = useMemo(() => {
-        return (
-            <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', }}>
-                <Text style={{ fontSize: 24 }}>+</Text>
-            </View>
-        )
-    }, []);
-
-    const playMovieIcon = useMemo(() => {
-        return <Image source={require('../../../shared/assets/play-button.png')} style={{ width: 30, height: 30 }} />
-    }, []);
 
     return (
         <View style={styles.container}>
@@ -53,12 +40,21 @@ export default function SpotlightMovie({ title, poster, imdbID }: Movie) {
             </Pressable>
             <View style={styles.row}>
                 <Button
-                    icon={playMovieIcon}
+                    icon={
+                        <Image
+                            source={require('../../../shared/assets/play-button.png')}
+                            style={{ width: 30, height: 30 }}
+                        />
+                    }
                     text="Play Movie"
                     cta={onPlayMoviePressedHandler}
                 />
                 <Button
-                    icon={addToFavIcon}
+                    icon={
+                        <View style={styles.addToFavoritesIcon}>
+                            <Typography size='xl' color={theme.colors.background} weight='semibold' text='+' />
+                        </View>
+                    }
                     text="Add to favorites"
                     cta={onAddToFavoritesPressedHandler}
                 />
@@ -137,5 +133,9 @@ const styles = StyleSheet.create({
         fontSize: 32,
         lineHeight: 32,
         color: theme.colors.textPrimary,
+    },
+    addToFavoritesIcon: {
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 });

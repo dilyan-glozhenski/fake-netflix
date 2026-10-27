@@ -19,12 +19,20 @@ export default function MovieCard({
         router.push({ pathname: '/movie/[id]', params: { id: imdbID } });
     };
 
+    const posterSource = poster?.trim()
+        ? { uri: poster }
+        : require('../../../shared/assets/no-image.png');
+
     return (
         <Pressable
             accessibilityRole="link"
             onPress={onMoviePressedHandler}>
             <View style={[styles.card, cardSizeStyles[size]]}>
-                <Image src={poster} alt={`${title} poster`} style={styles.poster} />
+                <Image
+                    source={posterSource}
+                    alt={`${title} poster`}
+                    style={styles.poster}
+                />
             </View>
         </Pressable>
 
